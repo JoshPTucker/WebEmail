@@ -10,10 +10,10 @@
 <div>
 <form action="Webmail" method="post">
 <fieldset>
-<input type="text" id="subject" value ="" name = "subject" />
-<input type="text" id="to" value=""  name="to"/>
-<input type="text" id="from" value="" name = "from"/>
-<textarea rows="4" cols="50" id ="body" name="body"></textarea>
+<input type="text" id="subject" value ="" name = "subject" placeholder="subject" />
+<input type="text" id="to" value=""  name="to" placeholder="to"/>
+<input type="text" id="from" value="" name = "from" placeholder="from"/>
+<textarea rows="4" cols="65" id ="body" name="body"></textarea>
 </fieldset>
 <fieldset>
 <input type="submit" id="submit" name="submit" value="send"/>

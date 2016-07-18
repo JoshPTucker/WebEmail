@@ -43,13 +43,13 @@ public class Webmail extends HttpServlet {
 		String body = request.getParameter("body");
 		String to = request.getParameter("to");
 		String from  = request.getParameter("from");
-		
+		String subject =request.getParameter("subject");
 		//Get mail session
 		Properties props = new Properties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.host", "localhost");
         props.put("mail.smtp.port", 8081);
-        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.auth", "false");
         props.put("mail.smtp.quitwait", "false");
         //NOTE: Session object is part of javax.mail.Session
         javax.mail.Session session = javax.mail.Session.getDefaultInstance(props);
@@ -57,6 +57,7 @@ public class Webmail extends HttpServlet {
         //message object
         boolean bodyIsHTML = false;
         Message message = new MimeMessage(session);
+        try{
         message.setSubject(subject);
         if (bodyIsHTML) {
         message.setContent(body, "text/html");
@@ -75,7 +76,12 @@ public class Webmail extends HttpServlet {
         transport.connect();
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
-        
+        }
+        catch(Exception e){
+        	System.err.println(e);
+        }
+        String nextURL ="/webmail.jsp";
+        request.getRequestDispatcher(nextURL).forward(request, response);
 	}
 
 }
